@@ -1,13 +1,13 @@
 import { Navigation } from "@/components/Navigation";
-import { Hero } from "@/components/Hero";
+import { SignUpForm } from "@/components/auth/SignUpForm";
 
-const Index = () => {
+const SignUp = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <Hero />
+      <SignUpForm />
     </div>
   );
 };
 
-export default Index;
+export default SignUp;
