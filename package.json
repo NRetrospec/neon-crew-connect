@@ -9,8 +9,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:backend": "cd backend && npm install",
-    "start:backend": "cd backend && npm start",
+    "build:backend": "npm install --prefix backend",
+    "start:backend": "npm start --prefix backend",
     "start": "npm run start:backend"
   },
   "dependencies": {
