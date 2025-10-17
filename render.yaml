@@ -1,11 +1,10 @@
 services:
   - type: web
     name: neon-crew-frontend
-    env: node
+    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: dist   # this tells Render it's static
-    startCommand: ""          # must be blank to avoid “missing startCommand” error
+    staticPublishPath: dist
 
   - type: web
     name: neon-crew-backend
