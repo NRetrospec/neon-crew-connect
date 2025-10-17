@@ -1,0 +1,100 @@
+/* Animated Background Themes */
+
+/* Neon Flow - Gradient Animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.neon-flow {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Aurora - Soft animated aurora effect */
+@keyframes auroraShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.aurora {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: auroraShift 20s ease infinite;
+  position: relative;
+}
+
+.aurora::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.1), transparent),
+              radial-gradient(ellipse at bottom, rgba(0, 255, 255, 0.1), transparent);
+  animation: auroraGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes auroraGlow {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Waves/Blobs - Floating blob animations */
+@keyframes blobFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(120deg); }
+  66% { transform: translateY(5px) rotate(240deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
+.waves {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.waves::before,
+.waves::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: blobFloat 6s ease-in-out infinite;
+}
+
+.waves::before {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.waves::after {
+  top: 60%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+/* Particles - Handled via particles.js script, no CSS needed */
+
+/* Accessibility: Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .neon-flow,
+  .aurora,
+  .waves {
+    animation: none;
+  }
+  .aurora::before {
+    animation: none;
+  }
+  .waves::before,
+  .waves::after {
+    animation: none;
+  }
+}

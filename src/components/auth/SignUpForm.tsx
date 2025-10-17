@@ -4,7 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Gamepad2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signUp, setAuthToken } from "@/lib/auth";
+import { useUser } from "@/contexts/UserContext";
 
 const THEME_COLORS = [
   { name: "Rose Pink", value: "#CB5E77" },
@@ -23,11 +25,30 @@ export const SignUpForm = () => {
     favoriteGame: "",
     themeColor: THEME_COLORS[0].value,
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { setUser, addNotification } = useUser();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Connect to your backend JWT auth
-    console.log("Sign up data:", formData);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { token, user } = await signUp(formData);
+      setAuthToken(token, user);
+      setUser(user);
+      // Add some sample notifications
+      addNotification({ type: 'follow', from: 'GamerX', message: 'GamerX started following you' });
+      addNotification({ type: 'like', from: 'ProPlayer', message: 'ProPlayer liked your post' });
+      addNotification({ type: 'comment', from: 'StreamerY', message: 'StreamerY commented on your post: "Nice!"' });
+      navigate("/feed");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Sign up failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,6 +73,7 @@ export const SignUpForm = () => {
                 value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 required
+                disabled={loading}
               />
             </div>
 
@@ -64,6 +86,7 @@ export const SignUpForm = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
+                disabled={loading}
               />
             </div>
 
@@ -76,8 +99,15 @@ export const SignUpForm = () => {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
+                disabled={loading}
               />
             </div>
+
+            {error && (
+              <div className="text-red-500 text-sm text-center">
+                {error}
+              </div>
+            )}
 
             <div className="space-y-2">
               <Label htmlFor="game">Favorite Game</Label>
@@ -86,6 +116,7 @@ export const SignUpForm = () => {
                 placeholder="Fortnite, Valorant, COD..."
                 value={formData.favoriteGame}
                 onChange={(e) => setFormData({ ...formData, favoriteGame: e.target.value })}
+                disabled={loading}
               />
             </div>
 
@@ -110,8 +141,8 @@ export const SignUpForm = () => {
               <p className="text-xs text-muted-foreground">This will personalize your UI experience</p>
             </div>
 
-            <Button type="submit" className="w-full glow-primary" size="lg">
-              Create Account
+            <Button type="submit" className="w-full glow-primary" size="lg" disabled={loading}>
+              {loading ? "Creating Account..." : "Create Account"}
             </Button>
 
             <p className="text-center text-sm text-muted-foreground">

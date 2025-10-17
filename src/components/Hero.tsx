@@ -6,8 +6,11 @@ export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/20 to-background">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iIzhCNUI3RSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIuMSIvPjwvZz48L3N2Zz4=')] opacity-20" />
+      <div className="absolute inset-0 bg-[url('/background-im.jpeg')] bg-cover bg-center">
+      </div>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70">
       </div>
 
       {/* Floating gaming icons */}
