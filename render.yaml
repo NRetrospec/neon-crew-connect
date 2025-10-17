@@ -4,11 +4,11 @@ services:
     env: node
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    staticPublishPath: dist   # ✅ frontend only
 
   - type: web
     name: neon-crew-backend
     env: node
     rootDir: backend
     buildCommand: npm install
-    startCommand: node server.js
+    startCommand: node server.js   # ✅ backend only
