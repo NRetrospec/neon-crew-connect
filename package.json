@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "build:backend": "cd backend && npm install",
-    "start:backend": "cd backend && npm start"
+    "start:backend": "cd backend && npm start",
+    "start": "npm run start:backend"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
