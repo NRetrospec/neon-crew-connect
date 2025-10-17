@@ -1,14 +1,13 @@
 services:
-  - type: web
+  - type: static
     name: neon-crew-frontend
-    env: node
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: dist   # ✅ frontend only
+    staticPublishPath: dist
 
   - type: web
     name: neon-crew-backend
     env: node
     rootDir: backend
     buildCommand: npm install
-    startCommand: node server.js   # ✅ backend only
+    startCommand: node server.js
